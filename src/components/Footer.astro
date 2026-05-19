@@ -1,0 +1,66 @@
+---
+import { Dumbbell, MapPin, Clock, Instagram, Facebook } from 'lucide-astro';
+---
+
+<footer class="bg-bg-main border-t border-bg-hover/40 pt-16 pb-12 relative overflow-hidden text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 border-b border-bg-hover/40 pb-12">
+    
+    <!-- Columna 1: Brand & Filosofía -->
+    <div class="space-y-4 text-center md:text-left">
+      <a href="#" class="text-2xl font-black tracking-wider text-white flex items-center justify-center md:justify-start gap-2 select-none">
+        <Dumbbell class="w-6 h-6 text-brand-red" />
+        <span>IRON<span class="text-brand-red">GYM</span></span>
+      </a>
+      <p class="text-text-muted font-light leading-relaxed max-w-sm mx-auto md:mx-0">
+        Construyendo la comunidad de fuerza y disciplina más grande. No vendemos membresías, esculpimos hábitos.
+      </p>
+    </div>
+
+    <!-- Columna 2: Horarios -->
+    <div class="space-y-4 flex flex-col items-center md:items-start text-center md:text-left">
+      <h4 class="text-xs font-black uppercase tracking-widest text-white flex items-center gap-2">
+        <Clock class="w-4 h-4 text-brand-red" />
+        <span>Horarios de Apertura</span>
+      </h4>
+      <ul class="space-y-2 text-text-muted font-light">
+        <li>Lunes a Viernes: <span class="text-white font-medium">5:00 AM - 11:00 PM</span></li>
+        <li>Sábados: <span class="text-white font-medium">7:00 AM - 6:00 PM</span></li>
+        <li>Domingos: <span class="text-brand-red font-medium">Cerrado (Descanso)</span></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Ubicación y Redes -->
+    <div class="space-y-5 flex flex-col items-center md:items-start text-center md:text-left">
+      <div class="space-y-2">
+        <h4 class="text-xs font-black uppercase tracking-widest text-white flex items-center justify-center md:justify-start gap-2">
+          <MapPin class="w-4 h-4 text-brand-red" />
+          <span>Ubicación Exacta</span>
+        </h4>
+        <p class="text-text-muted font-light leading-relaxed max-w-xs">
+          Av. Principal de la Fuerza, Centro Comercial El Templo, Nivel PB.
+        </p>
+      </div>
+      
+      <!-- Redes Sociales -->
+      <div class="flex items-center gap-4">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2 bg-bg-card border border-bg-hover rounded-md text-text-muted hover:text-white hover:border-brand-red transition-all" aria-label="Instagram">
+          <Instagram class="w-4 h-4" />
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="p-2 bg-bg-card border border-bg-hover rounded-md text-text-muted hover:text-white hover:border-brand-red transition-all" aria-label="Facebook">
+          <Facebook class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
+    <p class="font-light text-center sm:text-left">
+      &copy; {new Date().getFullYear()} <span class="text-white font-medium uppercase tracking-wider">Iron Gym</span>. Todos los derechos reservados.
+    </p>
+    <p class="font-light tracking-wide text-center sm:text-right">
+      Diseñado para el <span class="text-white font-medium">Alto Rendimiento</span>
+    </p>
+  </div>
+</footer>

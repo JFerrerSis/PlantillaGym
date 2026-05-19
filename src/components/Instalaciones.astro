@@ -1,0 +1,130 @@
+---
+import { Dumbbell, Eye, Zap, Trophy } from 'lucide-astro';
+
+const areas = [
+  { 
+    title: "Zona de Fuerza", 
+    desc: "Mancuernas hasta 50kg, racks profesionales y plataformas de levantamiento.",
+    img: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=800",
+    tag: "Heavy Training",
+    icon: Dumbbell
+  },
+  { 
+    title: "Área de Cardio", 
+    desc: "Caminadoras de última generación, elípticas y escaladoras con simulación de ruta.",
+    img: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800",
+    tag: "Endurance",
+    icon: Zap
+  },
+  { 
+    title: "Clases Guiadas", 
+    desc: "Salón climatizado para HIIT, boxeo, yoga y entrenamientos funcionales.",
+    img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800",
+    tag: "Comunidad",
+    icon: Trophy
+  },
+  { 
+    title: "Zona de Máquinas", 
+    desc: "Equipamiento biomecánico seleccionado para aislar cada grupo muscular de forma segura.",
+    img: "https://images.unsplash.com/photo-1605296867304-46d5465a25f1?q=80&w=800",
+    tag: "Hypertrophy",
+    icon: Eye
+  },
+];
+---
+
+<section id="instalaciones" class="py-28 bg-bg-main relative overflow-hidden border-b border-bg-hover/30">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="text-center mb-20 space-y-4">
+      <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
+        Diseñado para el alto rendimiento
+      </span>
+      <h2 class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter">
+        NUESTRAS <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-red-bright drop-shadow-[0_0_15px_var(--color-brand-red-dim)]">INSTALACIONES</span>
+      </h2>
+      <div class="h-1 w-16 bg-brand-red mx-auto rounded-full"></div>
+      <p class="text-text-muted max-w-xl mx-auto text-base font-light">
+        Explora los espacios optimizados para llevar tu disciplina y tus capacidades físicas al siguiente nivel.
+      </p>
+    </div>
+
+    <!-- Grilla de Instalaciones (Responsive & Animada) -->
+    <div id="grid-instalaciones" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      {areas.map((area) => {
+        const IconComponent = area.icon;
+        
+        return (
+          <div 
+            class="installation-card opacity-0 group relative bg-bg-card border border-bg-hover rounded-lg overflow-hidden flex flex-col justify-end min-h-[380px] sm:min-h-[440px] transition-all duration-500 hover:border-brand-red/40 hover:shadow-[0_0_30px_rgba(225,29,72,0.05)]"
+          >
+            <!-- Imagen de Fondo (Filtro gris por defecto, se activa a color en hover) -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <img 
+                src={area.img} 
+                alt={area.title} 
+                class="w-full h-full object-cover filter grayscale contrast-[1.1] brightness-[0.6] group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-[0.5] transition-all duration-700 ease-out"
+                loading="lazy"
+              />
+              <!-- Overlays de degradado para asegurar legibilidad del texto -->
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-main via-bg-main/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-bg-main/50 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Contenido Superior Flotante (Tag e Icono) -->
+            <div class="absolute top-5 left-5 right-5 flex justify-between items-center z-10">
+              <span class="px-3 py-1 bg-bg-main/80 border border-bg-hover text-[10px] font-bold uppercase tracking-widest text-brand-red backdrop-blur-sm rounded-sm">
+                {area.tag}
+              </span>
+              <div class="p-2.5 bg-bg-main/80 border border-bg-hover rounded-md text-white group-hover:text-brand-red group-hover:border-brand-red/30 transition-colors backdrop-blur-sm">
+                <IconComponent class="w-5 h-5" />
+              </div>
+            </div>
+
+            <!-- Contenido Inferior (Textos) -->
+            <div class="relative z-10 p-6 sm:p-8 space-y-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <h3 class="text-2xl font-black text-white uppercase tracking-tight group-hover:text-brand-red transition-colors">
+                {area.title}
+              </h3>
+              <p class="text-sm text-text-muted group-hover:text-gray-300 transition-colors font-light leading-relaxed max-w-md">
+                {area.desc}
+              </p>
+            </div>
+            
+            <!-- Barra decorativa roja inferior oculta que se despliega en hover -->
+            <div class="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-brand-red to-brand-red-bright group-hover:w-full transition-all duration-500"></div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<!-- Script de Animaciones Integradas con Framer Motion -->
+<script>
+  import { animate, inView } from "framer-motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const gridContainer = document.getElementById("grid-instalaciones");
+    const cards = document.querySelectorAll(".installation-card");
+
+    if (gridContainer && cards.length > 0) {
+      // Configuramos el trigger inView para cuando el contenedor entre a la pantalla
+      inView(gridContainer, () => {
+        cards.forEach((card, index) => {
+          animate(card, 
+            { opacity: [0, 1], y: [40, 0] }, 
+            { 
+              duration: 0.7, 
+              delay: index * 0.18, // Efecto cascada (Stagger)
+              ease: [0.215, 0.610, 0.355, 1.000] // easeOutCubic
+            }
+          );
+        });
+      }, { amount: 0.15 }); // Dispara cuando el 15% de la grilla sea visible
+    }
+  });
+</script>

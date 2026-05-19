@@ -1,0 +1,70 @@
+---
+import { Dumbbell, Menu, X } from 'lucide-astro';
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-bg-main/80 backdrop-blur-md border-b border-bg-hover/40 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+    
+    <!-- Logo Brand -->
+    <a href="#" class="text-2xl font-black tracking-wider text-white flex items-center gap-2 select-none group">
+      <Dumbbell class="w-6 h-6 text-brand-red group-hover:rotate-45 transition-transform duration-300" />
+      <span>IRON<span class="text-brand-red">GYM</span></span>
+    </a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-text-muted">
+      <a href="#instalaciones" class="hover:text-white hover:text-brand-red transition-colors">Instalaciones</a>
+      <a href="#entrenadores" class="hover:text-white hover:text-brand-red transition-colors">Coachs</a>
+      <a href="#planes" class="hover:text-white hover:text-brand-red transition-colors">Planes</a>
+    </nav>
+
+    <!-- Desktop CTA Button -->
+    <div class="hidden md:flex">
+      <a href="#planes" class="px-5 py-2.5 border border-brand-red/50 text-brand-red text-xs font-black uppercase tracking-widest hover:bg-brand-red hover:text-white hover:border-brand-red transition-all duration-300 rounded-sm shadow-md shadow-brand-red-dim/20">
+        Unirme Ahora
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button (Toggle) -->
+    <button id="menu-btn" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none" aria-label="Abrir Menú">
+      <Menu id="icon-menu" class="w-6 h-6" />
+      <X id="icon-close" class="w-6 h-6 hidden" />
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-bg-card border-b border-bg-hover/80 px-6 py-8 space-y-6 flex flex-col shadow-2xl transition-all">
+    <nav class="flex flex-col gap-5 text-sm font-bold uppercase tracking-widest text-text-muted">
+      <a href="#instalaciones" class="mobile-link hover:text-brand-red transition-colors">Instalaciones</a>
+      <a href="#entrenadores" class="mobile-link hover:text-brand-red transition-colors">Coachs</a>
+      <a href="#planes" class="mobile-link hover:text-brand-red transition-colors">Planes</a>
+    </nav>
+    <a href="#planes" class="mobile-link w-full text-center py-3.5 bg-brand-red text-white text-xs font-black uppercase tracking-widest rounded transition-colors">
+      Unirme Ahora
+    </a>
+  </div>
+</header>
+
+<script>
+  // Lógica interactiva nativa para el menú responsive
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const iconMenu = document.getElementById("icon-menu");
+    const iconClose = document.getElementById("icon-close");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    function toggleMenu() {
+      mobileMenu?.classList.toggle("hidden");
+      iconMenu?.classList.toggle("hidden");
+      iconClose?.classList.toggle("hidden");
+    }
+
+    menuBtn?.addEventListener("click", toggleMenu);
+
+    // Cerrar el menú automáticamente al hacer click en cualquier enlace de celular
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", toggleMenu);
+    });
+  });
+</script>

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta de grises oscuros de fondo y superficies */
+  --color-bg-main: #0a0a0c;       /* Fondo ultra oscuro profundo */
+  --color-bg-card: #121216;       /* Gris oscuro para tarjetas y secciones */
+  --color-bg-hover: #1c1c24;      /* Gris intermedio para hovers o bordes suaves */
+  
+  /* Paleta de textos */
+  --color-text-muted: #94a3b8;    /* Gris claro para descripciones y subtítulos */
+  
+  /* El color Rojo de acento para resaltar cosas (Base, Brillante y Apagado) */
+  --color-brand-red: #e11d48;     /* Rojo intenso principal (rose-600) */
+  --color-brand-red-bright: #ff335c; /* Rojo neón brillante para hovers/foco */
+  --color-brand-red-dim: #4c111e;  /* Rojo vino oscuro para fondos sutiles o brillos */
+}
+
+/* Modificaciones globales personalizadas utilizando el tema v4 */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg-main);
+    color: #f3f4f6; /* Gris casi blanco nativo para texto principal */
+  }
+
+  /* Custom scrollbar adaptado al nuevo esquema oscuro y rojo */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-main);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-bg-hover);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-red);
+  }
+
+  /* Color de selección de texto */
+  ::selection {
+    background-color: var(--color-brand-red-dim);
+    color: #ffffff;
+  }
+}

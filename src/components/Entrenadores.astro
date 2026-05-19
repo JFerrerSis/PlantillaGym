@@ -1,0 +1,120 @@
+---
+import { Dumbbell, Trophy, Target, Award } from 'lucide-astro';
+
+const coachs = [
+  { 
+    name: "Carlos Mendoza", 
+    role: "Head Coach / Fuerza", 
+    specialty: "Powerlifting & Hipertrofia",
+    img: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=600",
+    icon: Trophy
+  },
+  { 
+    name: "Elena Rostova", 
+    role: "HIIT & Coach Funcional", 
+    specialty: "Acondicionamiento & Quema de Grasa",
+    img: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=600",
+    icon: Target
+  },
+  { 
+    name: "Marcus Vance", 
+    role: "Nutricionista Deportivo", 
+    specialty: "Planes Alimenticios & Estética",
+    img: "https://images.unsplash.com/photo-1534438090811-631494567ef5?q=80&w=600",
+    icon: Award
+  }
+];
+---
+
+<section id="entrenadores" class="py-28 bg-bg-card/30 border-b border-bg-hover/30 relative overflow-hidden">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="text-center mb-20 space-y-4">
+      <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
+        Respaldado por profesionales
+      </span>
+      <h2 class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter">
+        COACHS DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-white">ÉLITE</span>
+      </h2>
+      <div class="h-1 w-16 bg-brand-red mx-auto rounded-full"></div>
+      <p class="text-text-muted max-w-xl mx-auto text-base font-light">
+        No estás solo en esto. Nuestro equipo certificado está listo para diseñar tu mapa hacia el éxito físico.
+      </p>
+    </div>
+
+    <!-- Contenedor de Tarjetas (Grid Responsive) -->
+    <div id="grid-coachs" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      {coachs.map((coach) => {
+        const IconComponent = coach.icon;
+        
+        return (
+          <div 
+            class="coach-card opacity-0 bg-bg-card border border-bg-hover p-4 rounded-lg group hover:border-brand-red/30 transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              <!-- Contenedor de la Imagen con Aspect Ratio Fijo -->
+              <div class="w-full aspect-[4/5] overflow-hidden rounded-md relative bg-bg-main mb-6">
+                <img 
+                  src={coach.img} 
+                  alt={coach.name} 
+                  class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-102 transition-all duration-500 ease-out" 
+                  loading="lazy" 
+                />
+                <!-- Degradado sutil sobre la foto del coach -->
+                <div class="absolute inset-0 bg-gradient-to-t from-bg-main/60 via-transparent to-transparent"></div>
+              </div>
+              
+              <!-- Detalles e Información -->
+              <div class="space-y-1 px-2">
+                <div class="flex items-center gap-2 text-brand-red">
+                  <IconComponent class="w-4 h-4 shrink-0" />
+                  <span class="text-[10px] font-black uppercase tracking-widest">{coach.role}</span>
+                </div>
+                <h3 class="text-2xl font-black text-white uppercase tracking-tight group-hover:text-brand-red transition-colors pt-1">
+                  {coach.name}
+                </h3>
+                <p class="text-xs text-text-muted font-light tracking-wide pt-1">
+                  Especialidad: {coach.specialty}
+                </p>
+              </div>
+            </div>
+
+            <!-- Botón / Red de contacto decorativa o sutil -->
+            <div class="pt-6 px-2 border-t border-bg-hover/60 mt-6 flex items-center justify-between text-xs text-text-muted group-hover:text-white transition-colors">
+              <span class="font-medium tracking-wider uppercase text-[11px]">Ver perfil fitness</span>
+              <Dumbbell class="w-4 h-4 text-bg-hover group-hover:text-brand-red transition-colors" />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<!-- Script de Animaciones Integradas con Framer Motion -->
+<script>
+  import { animate, inView } from "framer-motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const gridContainer = document.getElementById("grid-coachs");
+    const cards = document.querySelectorAll(".coach-card");
+
+    if (gridContainer && cards.length > 0) {
+      inView(gridContainer, () => {
+        cards.forEach((card, index) => {
+          animate(card, 
+            { opacity: [0, 1], y: [30, 0] }, 
+            { 
+              duration: 0.6, 
+              delay: index * 0.15, // Efecto cascada continuo
+              ease: "easeOut"
+            }
+          );
+        });
+      }, { amount: 0.2 });
+    }
+  });
+</script>

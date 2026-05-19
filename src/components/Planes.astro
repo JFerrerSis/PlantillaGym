@@ -1,0 +1,166 @@
+---
+import { Check, MessageSquare } from 'lucide-astro';
+
+// Reemplaza con el número de teléfono real del gimnasio (código de país + número, sin espacios ni el signo +)
+const WHATSAPP_NUMBER = "584123456789"; 
+
+const planes = [
+  {
+    name: "Plan Básico",
+    price: "25",
+    desc: "Ideal para mantener la constancia en tus entrenamientos básicos.",
+    features: [
+      "Acceso completo a sala de musculación",
+      "Área de cardio ilimitada",
+      "Lockers y vestuarios incluidos",
+      "Horario restringido: 6:00 AM - 4:00 PM"
+    ],
+    popular: false,
+    message: "¡Hola! Vengo de la web y me gustaría recibir información para inscribirme en el *Plan Básico* 🏋️‍♂️."
+  },
+  {
+    name: "Plan VIP Pro",
+    price: "40",
+    desc: "El pase definitivo para los que se toman la disciplina en serio.",
+    features: [
+      "Acceso libre total 24/7",
+      "Todas las clases guiadas (HIIT, Boxeo, Funcional)",
+      "Evaluación nutricional y antropometría mensual",
+      "1 Sesión de asesoría personalizada a la semana",
+      "Pase de invitado mensual gratuito"
+    ],
+    popular: true,
+    message: "¡Hola! Vengo de la web y estoy listo para dar el paso con el *Plan VIP Pro* 🔥. ¿Cuáles son los métodos de pago?"
+  },
+  {
+    name: "Plan Team Dúo",
+    price: "70",
+    desc: "Entrena con tu pareja o amigo y congelen el mejor precio.",
+    features: [
+      "Todos los beneficios del Plan VIP para dos personas",
+      "Mismo precio mensual congelado",
+      "10% de descuento en la tienda de suplementos",
+      "Acceso prioritario a eventos y retos del club"
+    ],
+    popular: false,
+    message: "¡Hola! Vengo de la web y nos interesa el *Plan Team Dúo* para entrenar en pareja 🤝. ¿Cómo agendamos la inscripción?"
+  }
+];
+---
+
+<section id="planes" class="py-28 bg-bg-main relative overflow-hidden border-b border-bg-hover/30">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="text-center mb-20 space-y-4">
+      <span class="text-xs font-bold uppercase tracking-[0.25em] text-brand-red block">
+        Membresías sin contratos forzosos
+      </span>
+      <h2 class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter">
+        ELIGE TU <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-red-bright drop-shadow-[0_0_15px_var(--color-brand-red-dim)]">PLAN</span>
+      </h2>
+      <div class="h-1 w-16 bg-brand-red mx-auto rounded-full"></div>
+      <p class="text-text-muted max-w-xl mx-auto text-base font-light">
+        Selecciona el combo que mejor se adapte a tus objetivos y arranca hoy mismo. Sin cuotas de inscripción ocultas.
+      </p>
+    </div>
+
+    <!-- Grilla de Planes (Responsive y con alineación perfecta) -->
+    <div id="grid-planes" class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6 max-w-6xl mx-auto items-stretch">
+      {planes.map((plan) => {
+        // Generamos el enlace de WhatsApp codificando el mensaje para evitar problemas con espacios y emojis
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(plan.message)}`;
+        
+        return (
+          <div 
+            class={`plan-card opacity-0 relative flex flex-col justify-between p-6 sm:p-8 rounded-xl border bg-bg-card transition-all duration-300 ${
+              plan.popular 
+                ? 'border-brand-red shadow-[0_0_40px_rgba(225,29,72,0.07)] md:-translate-y-4 z-10' 
+                : 'border-bg-hover hover:border-bg-hover*2'
+            }`}
+          >
+            <!-- Etiqueta de Recomendado para el Plan VIP -->
+            {plan.popular && (
+              <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-red text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1 rounded-full shadow-lg shadow-brand-red-dim">
+                MÁS POPULAR
+              </span>
+            )}
+
+            <div>
+              <!-- Nombre y Precio -->
+              <div class="space-y-2">
+                <h3 class="text-xl font-black uppercase tracking-wide text-white">{plan.name}</h3>
+                <p class="text-xs text-text-muted font-light leading-relaxed min-h-[32px]">{plan.desc}</p>
+                <div class="pt-4 flex items-baseline text-white">
+                  <span class="text-5xl font-black tracking-tight">${plan.price}</span>
+                  <span class="ml-1 text-sm text-text-muted font-light">/mes</span>
+                </div>
+              </div>
+
+              <!-- Lista de Beneficios -->
+              <ul class="space-y-4 border-t border-bg-hover/60 pt-6 mt-6 mb-8">
+                {plan.features.map((feat) => (
+                  <li class="flex items-start text-sm text-gray-300">
+                    <div class="h-5 w-5 rounded-full bg-brand-red-dim/40 border border-brand-red/30 flex items-center justify-center shrink-0 mr-3 mt-0.5">
+                      <Check class="h-3 w-3 text-brand-red" />
+                    </div>
+                    <span class="font-light leading-snug">{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Botón de Acción Directo a WhatsApp -->
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`w-full h-12 inline-flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest rounded transition-all duration-300 ${
+                plan.popular 
+                  ? 'bg-brand-red text-white hover:bg-brand-red-bright shadow-lg shadow-brand-red-dim/60' 
+                  : 'bg-bg-hover text-gray-300 hover:text-white hover:bg-bg-hover/80 border border-bg-hover'
+              }`}
+            >
+              <MessageSquare class="w-4 h-4 shrink-0" />
+              <span>Inscribirme por WhatsApp</span>
+            </a>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<!-- Script de Animaciones Integradas con Framer Motion -->
+<script>
+  import { animate, inView } from "framer-motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const gridContainer = document.getElementById("grid-planes");
+    const cards = document.querySelectorAll(".plan-card");
+
+    if (gridContainer && cards.length > 0) {
+      inView(gridContainer, () => {
+        cards.forEach((card, index) => {
+          // Si es el plan popular, hacemos que resalte un poco más en su escala final
+          const isPopular = card.classList.contains('border-brand-red');
+          
+          animate(card, 
+            { 
+              opacity: [0, 1], 
+              y: [40, isPopular && window.innerWidth >= 768 ? -16 : 0],
+              scale: [0.98, 1]
+            }, 
+            { 
+              duration: 0.65, 
+              delay: index * 0.15, 
+              ease: [0.16, 1, 0.3, 1] 
+            }
+          );
+        });
+      }, { amount: 0.15 });
+    }
+  });
+</script>

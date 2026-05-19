@@ -1,0 +1,123 @@
+---
+import { Dumbbell, ArrowRight, ShieldCheck, Flame } from 'lucide-astro';
+---
+
+<section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-bg-main">
+  <!-- Fondo de pantalla con overlay -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/images/wallpaper.webp" 
+      alt="Iron Gym Wallpaper" 
+      class="w-full h-full object-cover opacity-35 scale-105"
+    />
+    <div class="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-linear-to-r from-bg-main/90 via-transparent to-bg-main/90"></div>
+  </div>
+
+  <!-- Contenedor Principal -->
+  <div class="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 space-y-10 flex flex-col items-center justify-center min-h-[80vh]">
+    
+    <!-- Badge de bienvenida -->
+    <div 
+      data-animate="fade-in-down"
+      class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bg-card border border-bg-hover text-[11px] sm:text-xs font-semibold tracking-widest text-white uppercase shadow-xl"
+    >
+      <Flame class="w-4 h-4 text-brand-red animate-pulse" />
+      <span>Bienvenido al templo de la fuerza</span>
+    </div>
+
+    <!-- Título Principal con el Nombre del Gym en Gigante -->
+    <div class="space-y-4 w-full" data-animate="fade-in-up">
+      <span class="block text-4xl sm:text-6xl md:text-7xl font-black text-gray-400 tracking-tight uppercase">
+        BIENVENIDO A
+      </span>
+      <h1 class="text-6xl sm:text-8xl md:text-9xl font-black text-white uppercase tracking-tighter leading-none select-none">
+        <span class="text-transparent bg-clip-text bg-linear-to-b from-white to-gray-300">IRON</span>
+        <span class="text-brand-red inline-block drop-shadow-[0_0_30px_var(--color-brand-red-dim)] animate-pulse">GYM</span>
+      </h1>
+      <div class="h-1 w-24 bg-brand-red mx-auto mt-4 rounded-full shadow-[0_0_10px_var(--color-brand-red)]"></div>
+    </div>
+
+    <!-- Subtexto -->
+    <p 
+      data-animate="fade-in-up-delayed"
+      class="text-text-muted text-base sm:text-xl max-w-2xl mx-auto font-light leading-relaxed px-2"
+    >
+      El dolor es temporal, el orgullo es para siempre. No vendemos excusas, construimos disciplina con equipamiento profesional y coachs de élite.
+    </p>
+
+    <!-- Características Rápidas (Responsive Grid) -->
+    <div 
+      data-animate="fade-in-up-delayed-2"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl w-full px-2"
+    >
+      <div class="flex items-center justify-center sm:justify-start gap-3 bg-bg-card/40 border border-bg-hover/50 p-3.5 rounded backdrop-blur-sm">
+        <Dumbbell class="w-5 h-5 text-brand-red shrink-0" />
+        <span class="text-xs uppercase font-bold tracking-wider text-gray-300">Equipos Premium</span>
+      </div>
+      <div class="flex items-center justify-center sm:justify-start gap-3 bg-bg-card/40 border border-bg-hover/50 p-3.5 rounded backdrop-blur-sm">
+        <ShieldCheck class="w-5 h-5 text-brand-red shrink-0" />
+        <span class="text-xs uppercase font-bold tracking-wider text-gray-300">Acceso Seguro 24/7</span>
+      </div>
+    </div>
+
+    <!-- Botones de Acción Simétricos e Iguales (Totalmente Responsive) -->
+    <div 
+      data-animate="fade-in-up-delayed-2"
+      class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 w-full max-w-md sm:max-w-none px-2"
+    >
+      <a 
+        href="#planes" 
+        class="group w-full sm:w-60 h-14 inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-brand-red-bright text-white font-black uppercase tracking-widest text-xs sm:text-sm rounded transition-all duration-300 shadow-xl shadow-brand-red-dim/60 hover:-translate-y-0.5"
+      >
+        <span>Ver Planes</span>
+        <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+      </a>
+      
+      <a 
+        href="#instalaciones" 
+        class="w-full sm:w-60 h-14 inline-flex items-center justify-center border border-bg-hover bg-bg-card/40 text-gray-300 hover:text-white hover:bg-bg-hover text-xs sm:text-sm font-bold uppercase tracking-widest rounded transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5"
+      >
+        Ver Instalaciones
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Divisor inferior -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+    <svg class="relative block w-full h- sm:h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M1200 120L0 16.48V120z" class="fill-bg-main"></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  import { animate } from "framer-motion";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Badge (Fade down)
+    animate('[data-animate="fade-in-down"]', 
+      { opacity: [0, 1], y: [-20, 0] }, 
+      { duration: 0.8, ease: "easeOut" }
+    );
+
+    // 2. Título Gigante (Scale + Fade up)
+    animate('[data-animate="fade-in-up"]', 
+      { opacity: [0, 1], y: [40, 0] }, 
+      { duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }
+    );
+
+    // 3. Párrafo descriptivo
+    animate('[data-animate="fade-in-up-delayed"]', 
+      { opacity: [0, 1], y: [20, 0] }, 
+      { duration: 0.7, delay: 0.35, ease: "easeOut" }
+    );
+
+    // 4. Grid de features y Botones gemelos
+    animate('[data-animate="fade-in-up-delayed-2"]', 
+      { opacity: [0, 1], y: [15, 0] }, 
+      { duration: 0.6, delay: 0.55, ease: "easeOut" }
+    );
+  });
+</script>
